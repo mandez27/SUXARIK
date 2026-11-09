@@ -1,0 +1,58 @@
+{"timestamp":"00:00:04.392","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:19.066","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:01:10.485","source":"Server","level":"LOG","message":"✓ Compiled in 126ms"}
+{"timestamp":"00:01:15.737","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:02:25.163","source":"Server","level":"LOG","message":"✓ Compiled in 85ms"}
+{"timestamp":"00:02:27.617","source":"Server","level":"LOG","message":"✓ Compiled in 65ms"}
+{"timestamp":"00:02:31.471","source":"Server","level":"LOG","message":"✓ Compiled in 65ms"}
+{"timestamp":"00:02:37.395","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:03:41.103","source":"Server","level":"LOG","message":"✓ Compiled in 95ms"}
+{"timestamp":"00:03:44.468","source":"Server","level":"LOG","message":"✓ Compiled in 80ms"}
+{"timestamp":"00:03:51.715","source":"Server","level":"LOG","message":"✓ Compiled in 191ms"}
+{"timestamp":"00:03:52.827","source":"Browser","level":"ERROR","message":"./app/page.tsx:80:5\nError: Expression expected\n  78 |         </div>\n  79 |       </div>\n> 80 |     </main>\n     |     ^\n  81 |   );\n  82 | }\n  83 |\n\nParsing ecmascript source code failed\n\nImport traces:\n  Client Component Browser:\n    ./app/page.tsx [Client Component Browser]\n    ./app/page.tsx [Server Component]\n\n  Client Component SSR:\n    ./app/page.tsx [Client Component SSR]\n    ./app/page.tsx [Server Component] "}
+{"timestamp":"00:03:52.832","source":"Server","level":"ERROR","message":"[browser] \"./app/page.tsx:80:5\\nError: Expression expected\\n  78 |         </div>\\n  79 |       </div>\\n> 80 |     </main>\\n     |     ^\\n  81 |   );\\n  82 | }\\n  83 |\\n\\nParsing ecmascript source code failed\\n\\nImport traces:\\n  Client Component Browser:\\n    ./app/page.tsx [Client Component Browser]\\n    ./app/page.tsx [Server Component]\\n\\n  Client Component SSR:\\n    ./app/page.tsx [Client Component SSR]\\n    ./app/page.tsx [Server Component]\" \"\""}
+{"timestamp":"00:03:52.833","source":"Browser","level":"ERROR","message":"./app/page.tsx:80:6\nError: Unterminated regexp literal\n  78 |         </div>\n  79 |       </div>\n> 80 |     </main>\n     |      ^^^^^^\n  81 |   );\n  82 | }\n  83 |\n\nParsing ecmascript source code failed\n\nImport traces:\n  Client Component Browser:\n    ./app/page.tsx [Client Component Browser]\n    ./app/page.tsx [Server Component]\n\n  Client Component SSR:\n    ./app/page.tsx [Client Component SSR]\n    ./app/page.tsx [Server Component] "}
+{"timestamp":"00:03:52.834","source":"Server","level":"ERROR","message":"[browser] \"./app/page.tsx:80:6\\nError: Unterminated regexp literal\\n  78 |         </div>\\n  79 |       </div>\\n> 80 |     </main>\\n     |      ^^^^^^\\n  81 |   );\\n  82 | }\\n  83 |\\n\\nParsing ecmascript source code failed\\n\\nImport traces:\\n  Client Component Browser:\\n    ./app/page.tsx [Client Component Browser]\\n    ./app/page.tsx [Server Component]\\n\\n  Client Component SSR:\\n    ./app/page.tsx [Client Component SSR]\\n    ./app/page.tsx [Server Component]\" \"\""}
+{"timestamp":"00:03:53.821","source":"Browser","level":"ERROR","message":"./app/page.tsx:80:5\nError: Expression expected\n  78 |         </div>\n  79 |       </div>\n> 80 |     </main>\n     |     ^\n  81 |   );\n  82 | }\n  83 |\n\nParsing ecmascript source code failed\n\nImport traces:\n  Client Component Browser:\n    ./app/page.tsx [Client Component Browser]\n    ./app/page.tsx [Server Component]\n\n  Client Component SSR:\n    ./app/page.tsx [Client Component SSR]\n    ./app/page.tsx [Server Component] "}
+{"timestamp":"00:03:53.823","source":"Server","level":"ERROR","message":"[browser] \"./app/page.tsx:80:5\\nError: Expression expected\\n  78 |         </div>\\n  79 |       </div>\\n> 80 |     </main>\\n     |     ^\\n  81 |   );\\n  82 | }\\n  83 |\\n\\nParsing ecmascript source code failed\\n\\nImport traces:\\n  Client Component Browser:\\n    ./app/page.tsx [Client Component Browser]\\n    ./app/page.tsx [Server Component]\\n\\n  Client Component SSR:\\n    ./app/page.tsx [Client Component SSR]\\n    ./app/page.tsx [Server Component]\" \"\""}
+{"timestamp":"00:03:53.826","source":"Browser","level":"ERROR","message":"./app/page.tsx:80:6\nError: Unterminated regexp literal\n  78 |         </div>\n  79 |       </div>\n> 80 |     </main>\n     |      ^^^^^^\n  81 |   );\n  82 | }\n  83 |\n\nParsing ecmascript source code failed\n\nImport traces:\n  Client Component Browser:\n    ./app/page.tsx [Client Component Browser]\n    ./app/page.tsx [Server Component]\n\n  Client Component SSR:\n    ./app/page.tsx [Client Component SSR]\n    ./app/page.tsx [Server Component] "}
+{"timestamp":"00:03:53.838","source":"Server","level":"ERROR","message":"[browser] \"./app/page.tsx:80:6\\nError: Unterminated regexp literal\\n  78 |         </div>\\n  79 |       </div>\\n> 80 |     </main>\\n     |      ^^^^^^\\n  81 |   );\\n  82 | }\\n  83 |\\n\\nParsing ecmascript source code failed\\n\\nImport traces:\\n  Client Component Browser:\\n    ./app/page.tsx [Client Component Browser]\\n    ./app/page.tsx [Server Component]\\n\\n  Client Component SSR:\\n    ./app/page.tsx [Client Component SSR]\\n    ./app/page.tsx [Server Component]\" \"\""}
+{"timestamp":"00:03:53.839","source":"Browser","level":"ERROR","message":"./app/page.tsx:80:5\nError: Expression expected\n  78 |         </div>\n  79 |       </div>\n> 80 |     </main>\n     |     ^\n  81 |   );\n  82 | }\n  83 |\n\nParsing ecmascript source code failed\n\nImport traces:\n  Client Component Browser:\n    ./app/page.tsx [Client Component Browser]\n    ./app/page.tsx [Server Component]\n\n  Client Component SSR:\n    ./app/page.tsx [Client Component SSR]\n    ./app/page.tsx [Server Component] "}
+{"timestamp":"00:03:53.840","source":"Server","level":"ERROR","message":"[browser] \"./app/page.tsx:80:5\\nError: Expression expected\\n  78 |         </div>\\n  79 |       </div>\\n> 80 |     </main>\\n     |     ^\\n  81 |   );\\n  82 | }\\n  83 |\\n\\nParsing ecmascript source code failed\\n\\nImport traces:\\n  Client Component Browser:\\n    ./app/page.tsx [Client Component Browser]\\n    ./app/page.tsx [Server Component]\\n\\n  Client Component SSR:\\n    ./app/page.tsx [Client Component SSR]\\n    ./app/page.tsx [Server Component]\" \"\""}
+{"timestamp":"00:03:53.840","source":"Browser","level":"ERROR","message":"./app/page.tsx:80:6\nError: Unterminated regexp literal\n  78 |         </div>\n  79 |       </div>\n> 80 |     </main>\n     |      ^^^^^^\n  81 |   );\n  82 | }\n  83 |\n\nParsing ecmascript source code failed\n\nImport traces:\n  Client Component Browser:\n    ./app/page.tsx [Client Component Browser]\n    ./app/page.tsx [Server Component]\n\n  Client Component SSR:\n    ./app/page.tsx [Client Component SSR]\n    ./app/page.tsx [Server Component] "}
+{"timestamp":"00:03:53.841","source":"Server","level":"ERROR","message":"[browser] \"./app/page.tsx:80:6\\nError: Unterminated regexp literal\\n  78 |         </div>\\n  79 |       </div>\\n> 80 |     </main>\\n     |      ^^^^^^\\n  81 |   );\\n  82 | }\\n  83 |\\n\\nParsing ecmascript source code failed\\n\\nImport traces:\\n  Client Component Browser:\\n    ./app/page.tsx [Client Component Browser]\\n    ./app/page.tsx [Server Component]\\n\\n  Client Component SSR:\\n    ./app/page.tsx [Client Component SSR]\\n    ./app/page.tsx [Server Component]\" \"\""}
+{"timestamp":"00:03:56.050","source":"Server","level":"LOG","message":"✓ Compiled in 92ms"}
+{"timestamp":"00:04:02.033","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:05:58.197","source":"Server","level":"LOG","message":"✓ Compiled in 92ms"}
+{"timestamp":"00:06:13.451","source":"Server","level":"LOG","message":"✓ Compiled in 71ms"}
+{"timestamp":"00:06:21.183","source":"Server","level":"LOG","message":"✓ Compiled in 98ms"}
+{"timestamp":"00:06:23.277","source":"Server","level":"LOG","message":"✓ Compiled in 94ms"}
+{"timestamp":"00:06:27.871","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:06:30.826","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:06:38.211","source":"Browser","level":"LOG","message":"ID(1): NO"}
+{"timestamp":"00:06:38.826","source":"Browser","level":"LOG","message":"ID(2): YES"}
+{"timestamp":"00:07:11.493","source":"Server","level":"LOG","message":"✓ Compiled in 97ms"}
+{"timestamp":"00:07:16.086","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:07:56.878","source":"Server","level":"LOG","message":"✓ Compiled in 265ms"}
+{"timestamp":"00:08:42.100","source":"Server","level":"LOG","message":"✓ Compiled in 65ms"}
+{"timestamp":"00:09:14.607","source":"Server","level":"LOG","message":"✓ Compiled in 55ms"}
+{"timestamp":"00:09:17.889","source":"Server","level":"LOG","message":"✓ Compiled in 249ms"}
+{"timestamp":"00:09:44.785","source":"Server","level":"LOG","message":"✓ Compiled in 58ms"}
+{"timestamp":"00:09:55.498","source":"Server","level":"LOG","message":"✓ Compiled in 61ms"}
+{"timestamp":"00:09:58.324","source":"Server","level":"LOG","message":"✓ Compiled in 58ms"}
+{"timestamp":"00:10:01.885","source":"Server","level":"LOG","message":"✓ Compiled in 64ms"}
+{"timestamp":"00:10:20.247","source":"Server","level":"LOG","message":"✓ Compiled in 55ms"}
+{"timestamp":"00:10:27.823","source":"Server","level":"LOG","message":"✓ Compiled in 221ms"}
+{"timestamp":"00:10:31.007","source":"Server","level":"LOG","message":"✓ Compiled in 68ms"}
+{"timestamp":"00:10:34.991","source":"Server","level":"LOG","message":"✓ Compiled in 76ms"}
+{"timestamp":"00:10:48.087","source":"Server","level":"LOG","message":"✓ Compiled in 66ms"}
+{"timestamp":"00:47:44.845","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:47:47.534","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:48:21.315","source":"Browser","level":"LOG","message":"ID(1): NO"}
+{"timestamp":"00:48:22.180","source":"Browser","level":"LOG","message":"ID(2): YES"}
+{"timestamp":"00:49:57.476","source":"Browser","level":"LOG","message":"ID(1): YES"}
+{"timestamp":"00:49:58.206","source":"Browser","level":"LOG","message":"ID(2): NO"}
+{"timestamp":"00:49:58.839","source":"Browser","level":"LOG","message":"ID(1): YES"}
+{"timestamp":"00:49:59.343","source":"Browser","level":"LOG","message":"ID(2): NO"}
+{"timestamp":"00:50:07.581","source":"Browser","level":"LOG","message":"ID(1): NO"}
+{"timestamp":"00:50:08.281","source":"Browser","level":"LOG","message":"ID(2): YES"}
