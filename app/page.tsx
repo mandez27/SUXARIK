@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import ChatWindow from "@/components/ChatWindow";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -70,9 +69,8 @@ export default function Home() {
 
           </div>
 
-          {/* Важно: задаем ячейке класс h-full и overflow-hidden, чтобы контролировать границы */}
-          <div className="h-full overflow-hidden">
-              <ChatWindow />
+          <div style={{ padding: '20px' }}>
+            <p className="neon-form-footer"></p>
           </div>
         </div>
       </div>

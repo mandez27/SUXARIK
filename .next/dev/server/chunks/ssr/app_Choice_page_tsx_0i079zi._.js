@@ -20,24 +20,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$mo
 ;
 ;
 ;
-const INITIAL_CARDS = [
-    {
-        id: 1,
-        title: "ИМЯ 1",
-        desc: "Описание 1",
-        imageUrl: "",
-        color: "linear-gradient(135deg, #00f0ff 0%, #0044ff 100%)"
-    },
-    {
-        id: 2,
-        title: "ИМЯ 2",
-        desc: "Описание 2",
-        imageUrl: "",
-        color: "linear-gradient(135deg, #ff007f 0%, #7f00ff 100%)"
-    }
-];
 function Home() {
-    const [cards, setCards] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(INITIAL_CARDS);
+    // Изначально карточек нет, они грузятся с бэка
+    const [cards, setCards] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
     const activeCard = cards[0];
     const controls = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$animation$2f$hooks$2f$use$2d$animation$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useAnimation"])();
     const x = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$motion$2d$value$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMotionValue"])(0);
@@ -57,21 +43,53 @@ function Home() {
         1,
         0.5
     ]);
+    // 1. Загрузка карточек (ID, имя, пол) с бэкенда при старте страницы
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        const fetchCards = async ()=>{
+            try {
+                const response = await fetch('http://127.0.0');
+                if (!response.ok) throw new Error('Ошибка загрузки карточек');
+                const data = await response.json();
+                setCards(data);
+            } catch (error) {
+                console.error('Не удалось загрузить анкеты:', error);
+            } finally{
+                setLoading(false);
+            }
+        };
+        fetchCards();
+    }, []);
+    // 2. Отправка решения (YES/NO) на бэкенд FastAPI
+    const sendSwipeDecision = async (cardId, decision)=>{
+        try {
+            await fetch('http://127.0.0', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    card_id: cardId,
+                    decision: decision
+                })
+            });
+        } catch (error) {
+            console.error('Ошибка при отправке свайпа на бэк:', error);
+        }
+    };
     const onSwipeLeft = (cardId)=>{
         console.log(`ID(${cardId}): NO`);
+        sendSwipeDecision(cardId, 'NO'); // отправляем в FastAPI
     };
     const onSwipeRight = (cardId)=>{
         console.log(`ID(${cardId}): YES`);
+        sendSwipeDecision(cardId, 'YES'); // отправляем в FastAPI
     };
     const removeTopCard = (direction)=>{
         if (!activeCard) return;
         if (direction === 'left') onSwipeLeft(activeCard.id);
         if (direction === 'right') onSwipeRight(activeCard.id);
-        if (cards.length === 1) {
-            setCards(INITIAL_CARDS);
-        } else {
-            setCards((prevCards)=>prevCards.slice(1));
-        }
+        // Удаляем карточку, которую только что свайпнули
+        setCards((prevCards)=>prevCards.slice(1));
         controls.set({
             x: 0,
             opacity: 1
@@ -108,6 +126,53 @@ function Home() {
             });
         }
     };
+    // Состояния загрузки и отсутствия карточек
+    if (loading) {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
+            className: "neon-main-layout",
+            style: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                color: '#fff'
+            },
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                children: "Загрузка анкет..."
+            }, void 0, false, {
+                fileName: "[project]/app/Choice/page.tsx",
+                lineNumber: 107,
+                columnNumber: 9
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/app/Choice/page.tsx",
+            lineNumber: 106,
+            columnNumber: 7
+        }, this);
+    }
+    if (cards.length === 0) {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
+            className: "neon-main-layout",
+            style: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                color: '#fff'
+            },
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                children: "Анкеты закончились! Приходите позже."
+            }, void 0, false, {
+                fileName: "[project]/app/Choice/page.tsx",
+                lineNumber: 115,
+                columnNumber: 9
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/app/Choice/page.tsx",
+            lineNumber: 114,
+            columnNumber: 7
+        }, this);
+    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
         className: "neon-main-layout",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -121,12 +186,12 @@ function Home() {
                         children: "GL"
                     }, void 0, false, {
                         fileName: "[project]/app/Choice/page.tsx",
-                        lineNumber: 79,
+                        lineNumber: 124,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/Choice/page.tsx",
-                    lineNumber: 78,
+                    lineNumber: 123,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -189,14 +254,15 @@ function Home() {
                                         width: '100%',
                                         height: '65%',
                                         position: 'relative',
-                                        background: activeCard.color || '#0d1530',
+                                        background: 'linear-gradient(135deg, #0d1530 0%, #05070f 100%)',
                                         pointerEvents: 'none',
                                         borderBottom: '2px solid #00f0ff',
                                         boxShadow: '0 4px 15px rgba(0, 240, 255, 0.3)'
                                     },
                                     children: activeCard.imageUrl && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                        // @ts-ignore
                                         src: activeCard.imageUrl,
-                                        alt: activeCard.title,
+                                        alt: activeCard.name,
                                         fill: true,
                                         sizes: "(max-width: 480px) 100vw, 360px",
                                         style: {
@@ -204,12 +270,12 @@ function Home() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/app/Choice/page.tsx",
-                                        lineNumber: 143,
+                                        lineNumber: 191,
                                         columnNumber: 21
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/Choice/page.tsx",
-                                    lineNumber: 133,
+                                    lineNumber: 179,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -234,10 +300,10 @@ function Home() {
                                                 textShadow: '0 0 2px #ffffff, 0 0 15px #00f0ff, 0 0 30px #0044ff',
                                                 letterSpacing: '0.5px'
                                             },
-                                            children: activeCard.title
+                                            children: activeCard.name
                                         }, void 0, false, {
                                             fileName: "[project]/app/Choice/page.tsx",
-                                            lineNumber: 164,
+                                            lineNumber: 215,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -248,43 +314,46 @@ function Home() {
                                                 margin: 0,
                                                 textShadow: '0 0 2px rgba(143, 160, 221, 0.3)'
                                             },
-                                            children: activeCard.desc
-                                        }, void 0, false, {
+                                            children: [
+                                                "Пол: ",
+                                                activeCard.gender === 'male' ? 'Мужской' : activeCard.gender === 'female' ? 'Женский' : activeCard.gender
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/app/Choice/page.tsx",
-                                            lineNumber: 175,
+                                            lineNumber: 226,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/Choice/page.tsx",
-                                    lineNumber: 153,
+                                    lineNumber: 203,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, activeCard.id, true, {
                             fileName: "[project]/app/Choice/page.tsx",
-                            lineNumber: 105,
+                            lineNumber: 150,
                             columnNumber: 15
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/Choice/page.tsx",
-                        lineNumber: 93,
+                        lineNumber: 138,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/Choice/page.tsx",
-                    lineNumber: 82,
+                    lineNumber: 127,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/Choice/page.tsx",
-            lineNumber: 77,
+            lineNumber: 122,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/Choice/page.tsx",
-        lineNumber: 76,
+        lineNumber: 121,
         columnNumber: 5
     }, this);
 }

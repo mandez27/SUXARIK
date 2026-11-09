@@ -2,28 +2,21 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useTransform, useAnimation, PanInfo } from 'framer-motion';
 
-const INITIAL_CARDS = [
-  {
-    id: 1,
-    title: "ИМЯ 1",
-    desc: "Описание 1",
-    imageUrl: "",
-    color: "linear-gradient(135deg, #00f0ff 0%, #0044ff 100%)"
-  },
-  {
-    id: 2,
-    title: "ИМЯ 2",
-    desc: "Описание 2",
-    imageUrl: "",
-    color: "linear-gradient(135deg, #ff007f 0%, #7f00ff 100%)"
-  }
-];
+// Описываем тип данных, которые мы теперь ждем от FastAPI
+interface Card {
+  id: number;
+  name: string;
+  gender: string;
+}
 
 export default function Home() {
-  const [cards, setCards] = useState(INITIAL_CARDS);
+  // Изначально карточек нет, они грузятся с бэка
+  const [cards, setCards] = useState<Card[]>([]);
+  const [loading, setLoading] = useState(true);
+  
   const activeCard = cards[0];
 
   const controls = useAnimation();
@@ -32,12 +25,50 @@ export default function Home() {
   const rotate = useTransform(x, [-200, 200], [-30, 30]);
   const opacity = useTransform(x, [-150, 0, 150], [0.5, 1, 0.5]);
 
+  // 1. Загрузка карточек (ID, имя, пол) с бэкенда при старте страницы
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const response = await fetch('http://127.0.0');
+        if (!response.ok) throw new Error('Ошибка загрузки карточек');
+        const data = await response.json();
+        setCards(data);
+      } catch (error) {
+        console.error('Не удалось загрузить анкеты:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCards();
+  }, []);
+
+  // 2. Отправка решения (YES/NO) на бэкенд FastAPI
+  const sendSwipeDecision = async (cardId: number, decision: 'YES' | 'NO') => {
+    try {
+      await fetch('http://127.0.0', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          card_id: cardId,
+          decision: decision,
+        }),
+      });
+    } catch (error) {
+      console.error('Ошибка при отправке свайпа на бэк:', error);
+    }
+  };
+
   const onSwipeLeft = (cardId: number) => {
     console.log(`ID(${cardId}): NO`);
+    sendSwipeDecision(cardId, 'NO'); // отправляем в FastAPI
   };
 
   const onSwipeRight = (cardId: number) => {
     console.log(`ID(${cardId}): YES`);
+    sendSwipeDecision(cardId, 'YES'); // отправляем в FastAPI
   };
 
   const removeTopCard = (direction: 'left' | 'right') => {
@@ -46,11 +77,8 @@ export default function Home() {
     if (direction === 'left') onSwipeLeft(activeCard.id);
     if (direction === 'right') onSwipeRight(activeCard.id);
 
-    if (cards.length === 1) {
-      setCards(INITIAL_CARDS);
-    } else {
-      setCards((prevCards) => prevCards.slice(1));
-    }
+    // Удаляем карточку, которую только что свайпнули
+    setCards((prevCards) => prevCards.slice(1));
 
     controls.set({ x: 0, opacity: 1 });
   };
@@ -72,9 +100,26 @@ export default function Home() {
     }
   };
 
+  // Состояния загрузки и отсутствия карточек
+  if (loading) {
+    return (
+      <main className="neon-main-layout" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#fff' }}>
+        <h3>Загрузка анкет...</h3>
+      </main>
+    );
+  }
+
+  if (cards.length === 0) {
+    return (
+      <main className="neon-main-layout" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: '#fff' }}>
+        <h3>Анкеты закончились! Приходите позже.</h3>
+      </main>
+    );
+  }
+
   return (
     <main className="neon-main-layout">
-      <div className="neon-app-container" >
+      <div className="neon-app-container">
         <header className="neon-app-header">
           <Link href="/.." className="neon-btn-link">GL</Link>
         </header>
@@ -130,19 +175,23 @@ export default function Home() {
                   touchAction: 'none'
                 }}
               >
+                {/* Верхняя часть (заглушка-градиент по умолчанию) */}
                 <div style={{
                   width: '100%',
                   height: '65%',
                   position: 'relative',
-                  background: activeCard.color || '#0d1530',
+                  background: 'linear-gradient(135deg, #0d1530 0%, #05070f 100%)',
                   pointerEvents: 'none',
                   borderBottom: '2px solid #00f0ff',
                   boxShadow: '0 4px 15px rgba(0, 240, 255, 0.3)'
                 }}>
+                  {/* Если в будущем FastAPI начнет присылать imageUrl */}
+                  {/* @ts-ignore */}
                   {activeCard.imageUrl && (
                     <Image
+                      // @ts-ignore
                       src={activeCard.imageUrl}
-                      alt={activeCard.title}
+                      alt={activeCard.name}
                       fill
                       sizes="(max-width: 480px) 100vw, 360px"
                       style={{ objectFit: 'cover' }}
@@ -150,6 +199,7 @@ export default function Home() {
                   )}
                 </div>
 
+                {/* Нижняя текстовая часть карточки */}
                 <div style={{
                   padding: '24px',
                   display: 'flex',
@@ -161,6 +211,7 @@ export default function Home() {
                   justifyContent: 'center',
                   backgroundColor: '#060914'
                 }}>
+                  {/* Отображаем Имя с бэкенда */}
                   <h3 style={{
                     fontSize: '26px',
                     fontWeight: '900',
@@ -169,7 +220,7 @@ export default function Home() {
                     textShadow: '0 0 2px #ffffff, 0 0 15px #00f0ff, 0 0 30px #0044ff',
                     letterSpacing: '0.5px'
                   }}>
-                    {activeCard.title}
+                    {activeCard.name}
                   </h3>
 
                   <p style={{
@@ -179,7 +230,7 @@ export default function Home() {
                     margin: 0,
                     textShadow: '0 0 2px rgba(143, 160, 221, 0.3)'
                   }}>
-                    {activeCard.desc}
+                    Пол: {activeCard.gender === 'male' ? 'Мужской' : activeCard.gender === 'female' ? 'Женский' : activeCard.gender}
                   </p>
                 </div>
               </motion.div>

@@ -28,7 +28,7 @@ export default function ChatWindow() {
   }, []);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });git checkout FrontEnd
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 
   };
 
